@@ -6,14 +6,14 @@ public interface RosterBase {
     Date getCreated();
     void setCreated(Date created);
 
-    int getId();
-    void setId(int id);
+    Long getId();
+    void setId(Long id);
 
     Boolean getActive();
     void setActive(Boolean active);
 
-    int getUnitCallSign();
-    void setUnitCallSign(int val);
+    String getUnitCallSign();
+    void setUnitCallSign(String val);
 
     Boolean IsCommand = false;
     Boolean IsOfficer = false;

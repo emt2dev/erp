@@ -5,8 +5,8 @@ public interface Base {
     Date getCreated();
     void setCreated(Date created);
 
-    int getId();
-    void setId(int id);
+    Long getId();
+    void setId(Long id);
 
     Boolean getActive();
     void setActive(Boolean active);

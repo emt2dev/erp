@@ -18,9 +18,9 @@ public class CallAssignment implements Base {
     private Date Created;
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
     private Boolean Active;
-    private int CallId;
+    private Long CallId;
     private String Vehicle;
-    private int CrewCount;
+    private Integer CrewCount;
 }

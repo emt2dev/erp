@@ -1,5 +1,6 @@
 package Models;
 
+import Models.enums.CallType;
 import Models.interfaces.Base;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,9 +16,9 @@ public class Call implements Base {
     private Date Created;
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
     private Boolean Active;
-    private int Type;
-    private int CreatedByUserId;
+    private CallType Type;
+    private Long CreatedByUserId;
     private String CADDisplay;
 }

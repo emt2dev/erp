@@ -15,12 +15,12 @@ public class Shift implements Base {
     private Date Created;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
     private Boolean Active;
-    private int RosterCount;
-    private int CallCount;
-    private int CommanderUserId;
-    private int HostUserId;
+    private Integer RosterCount;
+    private Integer CallCount;
+    private Long CommanderUserId;
+    private Long HostUserId;
     private Date Start;
     private Date End;
 }

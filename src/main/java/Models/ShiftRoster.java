@@ -15,15 +15,15 @@ public class ShiftRoster implements RosterBase {
     private Date Created;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
     private Boolean Active;
-    private int ShiftId;
-    private int RosterMemberId;
+    private Long ShiftId;
+    private Long RosterMemberId;
     private Boolean IsCommand;
     private Boolean IsOfficer;
     private Boolean IsMedical;
     private Boolean IsProbationary;
-    private int UnitCallSign;
+    private String UnitCallSign;
     private String VehicleCallSign;
     private Date Start;
     private Date End;

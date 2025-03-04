@@ -15,9 +15,9 @@ public class UserActions implements Base {
     private Date Created;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
     private Boolean Active;
-    private int RosterId;
+    private Long RosterId;
     private Models.enums.Action Action;
-    private int SubmittedUserId;
+    private Long SubmittedUserId;
 }
