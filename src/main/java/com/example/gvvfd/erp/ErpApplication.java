@@ -2,7 +2,11 @@ package com.example.gvvfd.erp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@EnableJpaRepositories(basePackages = "com.example.gvvfd.erp.Repositories")
+@EntityScan(basePackages = "com.example.gvvfd.erp.Models")
 @SpringBootApplication
 public class ErpApplication {
 
