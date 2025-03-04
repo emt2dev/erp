@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
+@RestController
 @RequestMapping("/api/shifts")
-public class ShiftController extends BaseController {
+public class ShiftController {
 
     @Autowired
     private ShiftService svc;

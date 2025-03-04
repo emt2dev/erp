@@ -30,19 +30,19 @@ public class WebSecurityConfiguration {
 
     @Bean
     public SecurityFilterChain secFChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/auth/**")
-                        .permitAll()
-                        .requestMatchers("/api/command/**")
-                        .hasAnyAuthority(UserRole.Command.name())
-                        .requestMatchers("/api/officer/**")
-                        .hasAnyAuthority(UserRole.Officer.name())
-                        .requestMatchers("/api/member/**")
-                        .hasAnyAuthority(UserRole.Member.name())
-                        .anyRequest().authenticated())
-                .sessionManagement(mgr -> mgr.sessionCreationPolicy(STATELESS))
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+        http
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/auth/login")
+                        .permitAll()).csrf(AbstractHttpConfigurer::disable);
+//                        .requestMatchers("/api/command/**")
+//                        .hasAnyAuthority(UserRole.Command.name())
+//                        .requestMatchers("/api/officer/**")
+//                        .hasAnyAuthority(UserRole.Officer.name())
+//                        .requestMatchers("/api/member/**")
+//                        .hasAnyAuthority(UserRole.Member.name())
+//                        .anyRequest().authenticated())
+//                .sessionManagement(mgr -> mgr.sessionCreationPolicy(STATELESS))
+//                .authenticationProvider(authenticationProvider())
+//                .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

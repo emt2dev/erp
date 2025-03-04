@@ -7,21 +7,25 @@ import com.example.gvvfd.erp.Services.Auth.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Optional;
 
+@CrossOrigin
+@RestController
 @RequestMapping("/api/auth")
-public class AuthController extends BaseController {
+public class AuthController {
     @Autowired
     private AuthService authSvc;
 
     @Autowired
     private AgencyService agencyService;
+
+    @PostMapping("/test-request")
+    public ResponseEntity<String> testPostRequest() {
+        return ResponseEntity.ok("POST request successful");
+    }
 
     // Define the login route
     @PostMapping("/api/auth/login")
