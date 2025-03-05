@@ -89,6 +89,7 @@ public class CallServiceImpl implements CallService {
         call.setType(CallType.ResidentialFire); // Set type (example value, use the actual enum type)
         call.setLocation("123131.43,4353553.44");
         call.setCreatedByUserId(1L);  // Example user ID
+        call.setShiftId(1L);
         call.setCadDisplay("ENGINE 4 | LADDER 4 RESPOND TO STRUCTURE FIRE"); // Example CAD display value
 
         // Create a list of CallAssignments

@@ -74,6 +74,7 @@ public class ShiftServiceImpl implements ShiftService {
         // Example of 3 roster members being assigned to different vehicles
         for (int i = 1; i <= 3; i++) {
             ShiftRoster shiftRoster = new ShiftRoster();
+            shiftRoster.setAgencyId(1L);
             shiftRoster.setCreated(new Date());  // Set created date for each shift roster
             shiftRoster.setActive(true);         // Set active status
             shiftRoster.setShiftId(shift.getId());  // Set the ShiftId
@@ -93,7 +94,7 @@ public class ShiftServiceImpl implements ShiftService {
     }
 
     @Transactional
-    public Boolean saveShiftWithAssignments(ShiftDTO shiftDTO) {
+    public Boolean saveShiftWithAssignments(ShiftDTO shiftDTO, Long agencyId) {
         // Create Shift entity
         Shift shift = new Shift();
         shift.setActive(shiftDTO.getActive());
@@ -112,6 +113,7 @@ public class ShiftServiceImpl implements ShiftService {
             ShiftRoster shiftRoster = new ShiftRoster();
             shiftRoster.setRosterMemberId(shiftRosterDTO.getRosterMemberId());
             shiftRoster.setIsCommand(shiftRosterDTO.getIsCommand());
+            shiftRoster.setAgencyId(agencyId);
             shiftRoster.setIsOfficer(shiftRosterDTO.getIsOfficer());
             shiftRoster.setIsMedical(shiftRosterDTO.getIsMedical());
             shiftRoster.setIsProbationary(shiftRosterDTO.getIsProbationary());

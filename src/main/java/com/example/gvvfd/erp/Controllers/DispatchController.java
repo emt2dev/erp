@@ -177,7 +177,7 @@ public class DispatchController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
-            Boolean Result = svc.saveShiftWithAssignments(Incoming);
+            Boolean Result = svc.saveShiftWithAssignments(Incoming, agencyId);
             if (Result)
                 return ResponseEntity.ok(true);
 

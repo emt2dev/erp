@@ -78,6 +78,7 @@ public class DispatchUtil {
         call.setCreated(callDTO.getCreated());
         call.setActive(callDTO.getActive());
         call.setType(callDTO.getType());
+        call.setLocation(callDTO.getLocation());
         call.setCreatedByUserId(callDTO.getCreatedByUserId());
         call.setCadDisplay(callDTO.getCadDisplay());
         call.setCallAssignments(callAssignments); // Set the list of CallAssignments
