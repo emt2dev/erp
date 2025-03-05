@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,14 @@ public class AgencyServiceImpl implements AgencyService {
         return repo.findById(agencyId);
     }
 
+    public void Update(Agency Obj) {
+        repo.saveAndFlush(Obj);
+    }
+
+    public List<Agency> GetAll() {
+        return repo.findAll();
+    }
+
     @PostConstruct
     public void init() {
         Agency a = new Agency();
@@ -30,6 +39,6 @@ public class AgencyServiceImpl implements AgencyService {
         a.setAdmin("YoDog117");
         a.setName("Gran Vista Volunteer Fire Department");
         a.setPlatform(Platform.Roblox);
-        repo.save(a);
+        repo.saveAndFlush(a);
     }
 }

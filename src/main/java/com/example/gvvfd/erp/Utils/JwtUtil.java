@@ -9,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,8 +35,15 @@ public class JwtUtil {
     }
 
     public Key getSigningKey() {
-        byte[] keyBytes = Decoders.BASE64.decode("jdfosjfpojpeojfowfpoejpowjfpojosjdf;ldsfm32po432j3940ui09#$#:JF:LSD:FL");
-        return Keys.hmacShaKeyFor(keyBytes);
+        String base64String = "CandyrollTechRobloxERPDev";  // Original string
+
+        // Pad or truncate to ensure it is exactly 32 bytes (256 bits) long
+        while (base64String.length() < 32) {
+            base64String += "0";  // Example padding with '0' to make it 32 bytes
+        }
+
+        byte[] keyBytes = base64String.getBytes(StandardCharsets.UTF_8);  // Convert to bytes
+        return Keys.hmacShaKeyFor(keyBytes);  // Generate HMAC key
     }
 
     public boolean isTokenValid(String jwt, UserDetails Deets) {

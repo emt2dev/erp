@@ -1,6 +1,7 @@
 package com.example.gvvfd.erp.Services.Shifts;
 
 import com.example.gvvfd.erp.DTOs.ShiftDTO;
+import com.example.gvvfd.erp.DTOs.ShiftUpdateDTO;
 import com.example.gvvfd.erp.Models.Shift;
 import com.example.gvvfd.erp.Models.ShiftRoster;
 import com.example.gvvfd.erp.Repositories.ShiftRepository;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +25,31 @@ public class ShiftServiceImpl implements ShiftService {
 
     @Autowired
     private ShiftRostersRepository shiftRosterRepository;  // Autowired to save ShiftRoster assignments
+
+    public Boolean updateShift(Long ShiftId, Long AgencyId, Boolean isActive) {
+        Optional<Shift> S = shiftRepository.findById(ShiftId);
+        if (S.isPresent()) {
+            Shift Exists = S.get();
+
+            if (!Exists.getActive() && isActive)
+                Exists.setStart(new Date());
+
+            Exists.setActive(isActive);
+
+            if (Exists.getActive() && !isActive)
+                Exists.setEnd(new Date());
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public Shift getShiftByIdAndAgencyId(Long id, Long agencyId) {
+        Optional<Shift> S = shiftRepository.findByIdAndAgencyId(id, agencyId);
+        return S.orElse(null);
+
+    }
 
     @PostConstruct
     public void init() {
@@ -39,7 +66,7 @@ public class ShiftServiceImpl implements ShiftService {
         shift.setEnd(new Date());     // Set the end time of the shift
 
         // Save the Shift instance
-        shift = shiftRepository.save(shift);
+        shift = shiftRepository.saveAndFlush(shift);
 
         // Create multiple ShiftRoster assignments (assign RosterMembers to vehicles)
         List<ShiftRoster> shiftRosters = new ArrayList<>();
@@ -57,20 +84,16 @@ public class ShiftServiceImpl implements ShiftService {
             shiftRoster.setIsProbationary(false); // Example: None are probationary
             shiftRoster.setUnitCallSign("Unit" + i);  // Set unit call sign (e.g., Unit1, Unit2)
             shiftRoster.setVehicleCallSign("Vehicle" + i); // Set vehicle call sign (e.g., Vehicle1, Vehicle2)
-            shiftRoster.setStart(new Date());   // Set the start time of the shift assignment
-            shiftRoster.setEnd(new Date());     // Set the end time of the shift assignment
 
             shiftRosters.add(shiftRoster);
         }
 
         // Save all ShiftRoster assignments
-        shiftRosterRepository.saveAll(shiftRosters);
+        shiftRosterRepository.saveAllAndFlush(shiftRosters);
     }
 
-
-
     @Transactional
-    public Shift saveShiftWithAssignments(ShiftDTO shiftDTO) {
+    public Boolean saveShiftWithAssignments(ShiftDTO shiftDTO) {
         // Create Shift entity
         Shift shift = new Shift();
         shift.setActive(shiftDTO.getActive());
@@ -82,7 +105,7 @@ public class ShiftServiceImpl implements ShiftService {
         shift.setEnd(shiftDTO.getEnd());
 
         // Save Shift entity
-        shift = shiftRepository.save(shift);
+        shift = shiftRepository.saveAndFlush(shift);
 
         // Save each ShiftAssignment (ShiftRoster)
         for (ShiftDTO.ShiftRosterDTO shiftRosterDTO : shiftDTO.getShiftAssignments()) {
@@ -94,14 +117,12 @@ public class ShiftServiceImpl implements ShiftService {
             shiftRoster.setIsProbationary(shiftRosterDTO.getIsProbationary());
             shiftRoster.setUnitCallSign(shiftRosterDTO.getUnitCallSign());
             shiftRoster.setVehicleCallSign(shiftRosterDTO.getVehicleCallSign());
-            shiftRoster.setStart(shiftRosterDTO.getStart());
-            shiftRoster.setEnd(shiftRosterDTO.getEnd());
 
             shiftRoster.setShiftId(shift.getId());
             // Save each ShiftRoster
-            shiftRosterRepository.save(shiftRoster);
+            shiftRosterRepository.saveAndFlush(shiftRoster);
         }
 
-        return shift;
+        return true;
     }
 }

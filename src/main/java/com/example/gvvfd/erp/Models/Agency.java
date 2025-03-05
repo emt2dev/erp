@@ -2,13 +2,17 @@ package com.example.gvvfd.erp.Models;
 
 import com.example.gvvfd.erp.Models.enums.Platform;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name="Agencies")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Agency {
 
     // Fields with private visibility and annotations

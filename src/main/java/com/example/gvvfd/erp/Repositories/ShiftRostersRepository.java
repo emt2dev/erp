@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ShiftRostersRepository extends JpaRepository<ShiftRoster, Long> {
-    // You can add custom queries if necessary
+
 }

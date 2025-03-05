@@ -29,6 +29,6 @@ public class UserActionsServiceImpl {
         userAction.setSubmittedUserId(1L); // Set the user ID (1 in this case)
 
         // Save the UserActions instance
-        userActionsRepository.save(userAction);
+        userActionsRepository.saveAndFlush(userAction);
     }
 }
