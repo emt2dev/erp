@@ -22,8 +22,8 @@ public class Shift implements Base {
     private Boolean active;
     private Byte rosterCount;
     private Byte callCount;
-    private Long commanderUserId;
-    private Long hostUserId;
+    private Long commanderRosterId;
+    private Long hostRosterId;
     private Date start;
     private Date end;
 }

@@ -84,6 +84,7 @@ public class CallServiceImpl implements CallService {
         // Create a Call instance
         Call call = new Call();
         call.setAgencyId(1L);
+        call.setDispatchedAt(null);
         call.setCreated(new Date());  // Set created date
         call.setActive(true);         // Set active status
         call.setType(CallType.ResidentialFire); // Set type (example value, use the actual enum type)

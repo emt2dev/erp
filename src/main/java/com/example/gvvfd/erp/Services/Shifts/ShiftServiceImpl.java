@@ -1,7 +1,7 @@
 package com.example.gvvfd.erp.Services.Shifts;
 
 import com.example.gvvfd.erp.DTOs.ShiftDTO;
-import com.example.gvvfd.erp.DTOs.ShiftUpdateDTO;
+import com.example.gvvfd.erp.DTOs.ShiftRosterDTO;
 import com.example.gvvfd.erp.Models.Shift;
 import com.example.gvvfd.erp.Models.ShiftRoster;
 import com.example.gvvfd.erp.Repositories.ShiftRepository;
@@ -21,10 +21,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ShiftServiceImpl implements ShiftService {
     @Autowired
-    private ShiftRepository shiftRepository;  // Autowired to save Shift entities
+    private final ShiftRepository shiftRepository;  // Autowired to save Shift entities
 
     @Autowired
-    private ShiftRostersRepository shiftRosterRepository;  // Autowired to save ShiftRoster assignments
+    private final ShiftRostersRepository shiftRosterRepository;  // Autowired to save ShiftRoster assignments
 
     public Boolean updateShift(Long ShiftId, Long AgencyId, Boolean isActive) {
         Optional<Shift> S = shiftRepository.findById(ShiftId);
@@ -60,8 +60,8 @@ public class ShiftServiceImpl implements ShiftService {
         shift.setActive(true);        // Set active status
         shift.setRosterCount((byte) 5); // Set the number of roster members
         shift.setCallCount((byte) 2);  // Set the number of calls
-        shift.setCommanderUserId(1L); // Example commander user ID
-        shift.setHostUserId(2L);      // Example host user ID
+        shift.setCommanderRosterId(1L); // Example commander user ID
+        shift.setHostRosterId(2L);      // Example host user ID
         shift.setStart(new Date());   // Set the start time of the shift
         shift.setEnd(new Date());     // Set the end time of the shift
 
@@ -100,8 +100,8 @@ public class ShiftServiceImpl implements ShiftService {
         shift.setActive(shiftDTO.getActive());
         shift.setRosterCount(shiftDTO.getRosterCount());
         shift.setCallCount(shiftDTO.getCallCount());
-        shift.setCommanderUserId(shiftDTO.getCommanderUserId());
-        shift.setHostUserId(shiftDTO.getHostUserId());
+        shift.setCommanderRosterId(shiftDTO.getCommanderRosterId());
+        shift.setHostRosterId(shiftDTO.getHostRosterId());
         shift.setStart(shiftDTO.getStart());
         shift.setEnd(shiftDTO.getEnd());
 
@@ -109,7 +109,7 @@ public class ShiftServiceImpl implements ShiftService {
         shift = shiftRepository.saveAndFlush(shift);
 
         // Save each ShiftAssignment (ShiftRoster)
-        for (ShiftDTO.ShiftRosterDTO shiftRosterDTO : shiftDTO.getShiftAssignments()) {
+        for (ShiftRosterDTO shiftRosterDTO : shiftDTO.getShiftAssignments()) {
             ShiftRoster shiftRoster = new ShiftRoster();
             shiftRoster.setRosterMemberId(shiftRosterDTO.getRosterMemberId());
             shiftRoster.setIsCommand(shiftRosterDTO.getIsCommand());

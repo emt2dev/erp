@@ -27,6 +27,9 @@ public class Call implements Base {
     @Column(name = "created", nullable = false)
     private Date created;
 
+    @Column(name = "dispatchedAt")
+    private Date dispatchedAt;
+
     @Column(name = "active")
     private Boolean active;
 
