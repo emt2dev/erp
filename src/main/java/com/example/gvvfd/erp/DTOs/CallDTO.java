@@ -20,16 +20,18 @@ public class CallDTO {
     private CallType type;
     private String location;
     private Long createdByUserId;
+    private Date dispatchedAt;
     private String cadDisplay;
     private List<CallAssignmentDTO> callAssignments;
 
     // Constructor
     public CallDTO(Long id, Long agencyId, Date created, Boolean active, CallType type,
-                   Long createdByUserId, String cadDisplay, List<CallAssignmentDTO> callAssignments) {
+                   Long createdByUserId, String cadDisplay, List<CallAssignmentDTO> callAssignments, Date dispatchedAt) {
         this.id = id;
         this.agencyId = agencyId;
         this.created = created;
         this.active = active;
+        this.dispatchedAt = null;
         this.type = type;
         this.createdByUserId = createdByUserId;
         this.cadDisplay = cadDisplay;

@@ -49,7 +49,8 @@ public class DispatchUtil {
                 call.getType(),
                 call.getCreatedByUserId(),
                 call.getCadDisplay(),
-                callAssignmentDTOs
+                callAssignmentDTOs,
+                call.getDispatchedAt()
         );
     }
 
