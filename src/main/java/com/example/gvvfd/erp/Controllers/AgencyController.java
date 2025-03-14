@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/dispatch")
+@RequestMapping("/api/agency")
 @AllArgsConstructor
 public class AgencyController {
     @Autowired

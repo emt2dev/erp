@@ -31,16 +31,16 @@ public class WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain secFChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(request -> request.requestMatchers("/api/auth/login", "/api/auth/test-request", "/api/info/**")
+                .authorizeHttpRequests(request -> request.requestMatchers("/api/auth/login", "/api/auth/test-request", "/api/info/**", "/api/dispatch/**", "/api/agency/**")
                         .permitAll()
                         .requestMatchers("/api/command/**")
                         .hasAnyAuthority(UserRole.Command.name())
                         .requestMatchers("/api/officer/**")
                         .hasAnyAuthority(UserRole.Officer.name(), UserRole.Command.name())  // Command can also access Officer
-                        .requestMatchers("/api/agency/**")
-                        .hasAnyAuthority(UserRole.Officer.name(), UserRole.Command.name())  // Command can also access Officer
-                        .requestMatchers("/api/dispatch/**")
-                        .hasAnyAuthority(UserRole.Officer.name(), UserRole.Command.name())  // Command can also access Officer
+//                        .requestMatchers("/api/agency/**")
+//                        .hasAnyAuthority(UserRole.Officer.name(), UserRole.Command.name())  // Command can also access Officer
+//                        .requestMatchers("/api/dispatch/**")
+//                        .hasAnyAuthority(UserRole.Officer.name(), UserRole.Command.name())  // Command can also access Officer
                         .requestMatchers("/api/member/**")
                         .hasAnyAuthority(UserRole.Member.name(), UserRole.Officer.name(), UserRole.Command.name())  // Officer and Command can access Member
                         .anyRequest().authenticated())
